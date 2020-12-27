@@ -30,7 +30,7 @@ spec:
         git url: 'https://github.com/deculare/cicd.git'
         container('docker') {
           script {
-            docker.withRegistry('https://docker.io', '556ddb0a-d1f8-4ea1-8850-20c27bb805c5') {
+            docker.withRegistry('', '556ddb0a-d1f8-4ea1-8850-20c27bb805c5') {
                 def image = docker.build('kimtao/project:hellowordcicd')
                 image.push() 
             }
