@@ -27,12 +27,12 @@ spec:
   stages {
     stage('Build Docker image') {
       steps {
-        git 'https://github.com/deculare/cicd.git'
+        git url: 'https://github.com/deculare/cicd.git'
         container('docker') {
           script {
-            def image = docker.build('kimtao/project:hellowordcicd')
-            image.inside() {
-              sh "whoami"
+            docker.withRegistry('https://hub.docker.com', '556ddb0a-d1f8-4ea1-8850-20c27bb805c5') {
+                def image = docker.build('kimtao/project:hellowordcicd')
+                image.push() 
             }
           }
         }
