@@ -13,4 +13,4 @@ WORKDIR /usr/src/app
 COPY . .
  
 # Run the crawler when the container launches.
-CMD [ "python3", "./helloworld" ]
+CMD [ "python3", "./helloworld.py" ]
