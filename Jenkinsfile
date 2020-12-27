@@ -40,7 +40,7 @@ spec:
     }
     stage('Deploy to K8S') {
       steps {
-      git url: 'https://github.com/deculare/cicd.git'
+      /git url: 'https://github.com/deculare/cicd.git'/
       container('docker') {kubernetesDeploy configs: 'deploy.yaml', dockerCredentials: [[credentialsId: '556ddb0a-d1f8-4ea1-8850-20c27bb805c5']], enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'kubeconfig-home', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
         }
       }
