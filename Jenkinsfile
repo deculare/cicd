@@ -1,8 +1,8 @@
 pipeline {
   agent {
     kubernetes {
-      cloud 'kubernetes'
-      inheritFrom 'jenkins-slave'
+      //cloud 'kubernetes'
+      label 'mypod'
       yaml """
 apiVersion: v1
 kind: Pod
@@ -17,7 +17,6 @@ spec:
     volumeMounts:
     - name: dockersock
       mountPath: /var/run/docker.sock
-  dnsPolicy: ClusterFirstWithHostNet
   volumes:
   - name: dockersock
     hostPath:
@@ -28,7 +27,7 @@ spec:
   stages {
     stage('Build Docker image') {
       steps {
-        git changelog: false, credentialsId: 'aws-codecommit-kim', poll: false, url: 'https://git-codecommit.ap-east-1.amazonaws.com/v1/repos/CICD.git'
+        git url: 'https://github.com/deculare/cicd.git'
         container('docker') {
           script {
             docker.withRegistry('', '556ddb0a-d1f8-4ea1-8850-20c27bb805c5') {
@@ -42,7 +41,7 @@ spec:
     stage('Deploy to K8S') {
       steps {
       /*git url: 'https://github.com/deculare/cicd.git'*/
-      container('docker') {kubernetesDeploy configs: 'deploy.yaml', dockerCredentials: [[credentialsId: '556ddb0a-d1f8-4ea1-8850-20c27bb805c5']], enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'kubeconfig-ycse', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+      container('docker') {kubernetesDeploy configs: 'deploy.yaml', dockerCredentials: [[credentialsId: '556ddb0a-d1f8-4ea1-8850-20c27bb805c5']], enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'kubernetes-home-prod', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
         }
       }
     }
