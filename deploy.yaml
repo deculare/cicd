@@ -17,6 +17,8 @@ spec:
     spec:
       containers:
       - image: kimtao/project:hellowordcicd
+        imagePullPolicy: Always
         name: project
-        resources: {}
+      imagePullSecrets:
+      - name: mydockerpass
 status: {}
