@@ -18,6 +18,7 @@ spec:
     - name: dockersock
       mountPath: /var/run/docker.sock
   dnsPolicy: ClusterFirstWithHostNet
+  hostNetwork: true
   volumes:
   - name: dockersock
     hostPath:
