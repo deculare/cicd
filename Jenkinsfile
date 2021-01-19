@@ -3,6 +3,7 @@ pipeline {
     kubernetes {
       cloud 'kubernetes'
       inheritFrom 'jenkins-slave'
+      defaultContainer 'jenkins-slave'
       yaml """
 apiVersion: v1
 kind: Pod
