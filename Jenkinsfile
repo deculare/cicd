@@ -2,6 +2,7 @@ pipeline {
   agent {
     kubernetes {
       cloud 'kubernetes'
+      label 'hello-world'
       inheritFrom 'jenkins-slave'
       defaultContainer 'jnlp'
       yaml """
