@@ -2,7 +2,6 @@ pipeline {
   agent {
     kubernetes {
       cloud 'kubernetes'
-      label 'jenkins-slave'
       inheritFrom 'jenkins-slave'
       yaml """
 apiVersion: v1
